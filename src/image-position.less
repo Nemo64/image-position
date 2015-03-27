@@ -1,0 +1,58 @@
+//noinspection CssOptimizeSimilarProperties
+.image-contain,
+.image-cover {
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    // create object positioning classes
+    // these build a better bootstrap integration
+    // however: these are mostly irrelevant if you don't use bootstrap
+    // if the variables for the grid aren't set, only xs will be generated
+    // don't use @size for anything else here
+    .create-positioning (@type, @size: 0) when (@size > 0) {
+
+        .create-position (@horizontal-name, @vertical-name) {
+            &.@{type}-@{horizontal-name}-@{vertical-name} {
+                object-position: @horizontal-name @vertical-name;
+                background-position: @horizontal-name @vertical-name;
+            }
+        }
+
+        .create-position(left, top);
+        .create-position(left, center);
+        .create-position(left, bottom);
+        .create-position(center, top);
+        .create-position(center, center);
+        .create-position(center, bottom);
+        .create-position(right, top);
+        .create-position(right, center);
+        .create-position(right, bottom);
+    }
+
+    .create-positioning(xs, 1);
+
+    @media (min-width: @screen-sm-min) {
+        .create-positioning(sm, @screen-sm-min);
+    }
+
+    @media (min-width: @screen-md-min) {
+        .create-positioning(md, @screen-md-min);
+    }
+
+    @media (min-width: @screen-lg-min) {
+        .create-positioning(lg, @screen-lg-min);
+    }
+}
+
+.image-contain {
+    object-fit: contain;
+    background-size: contain;
+}
+
+.image-cover {
+    object-fit: cover;
+    background-size: cover;
+}
