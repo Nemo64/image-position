@@ -2,7 +2,6 @@
     "use strict";
 
     var IMAGE_SELECTOR = 'img.image-contain, img.image-cover';
-    var IMAGE_CLASS_EXPRESSION = /image-(contain|cover)/i;
     var IMAGE_POLYFILL_CLASS = 'image-polyfill';
     var IMAGE_POLYFILL_SELECTOR = '.' + IMAGE_POLYFILL_CLASS;
     // thanks to: http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever
