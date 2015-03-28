@@ -2,6 +2,7 @@
     "use strict";
 
     var IMAGE_SELECTOR = 'img.image-contain, img.image-cover';
+    var IMAGE_CLASS_EXPRESSION = /image-(contain|cover)/i;
     var IMAGE_POLYFILL_CLASS = 'image-polyfill';
     var IMAGE_POLYFILL_SELECTOR = '.' + IMAGE_POLYFILL_CLASS;
     // thanks to: http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever
@@ -22,6 +23,11 @@
         return; // full support detected
     }
 
+    if (!$.support.backgroundSize) {
+        $('html').addClass('no-backgroundsize'); // add modernizr class (for the case it isn't there)
+        return; // it's hopeless
+    }
+
     $document.on('ready.image.position update.image.position', function (e) {
         var $target = $(e.target);
         var $images = $target.is(IMAGE_SELECTOR) ? $target : $target.find(IMAGE_SELECTOR);
@@ -33,9 +39,9 @@
         $images.not(IMAGE_POLYFILL_SELECTOR).each(function () {
             var $image = $(this).addClass(IMAGE_POLYFILL_CLASS);
 
-            // the check is simple: if the image src is not our transparent git, it was set by someone
-            // if so, then set the background image to that src and replace the main image with the transparent gif
             var checkChanges = function () {
+                // the check is simple: if the image src is not our transparent git, it was set by someone
+                // if so, then set the background image to that src and replace the main image with the transparent gif
                 var imageSrc = $image.prop('src');
                 if (imageSrc !== TRANSPARENT_IMAGE_SRC) {
                     $image.css({backgroundImage: 'url("' + imageSrc + '")'});
