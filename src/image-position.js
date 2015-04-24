@@ -42,11 +42,16 @@
                 // the check is simple: if the image src is not our transparent git, it was set by someone
                 // if so, then set the background image to that src and replace the main image with the transparent gif
                 var imageSrc = $image.prop('src');
-                if (imageSrc !== TRANSPARENT_IMAGE_SRC) {
-                    $image.css({backgroundImage: 'url("' + imageSrc + '")'});
-                    $image.prop({src: TRANSPARENT_IMAGE_SRC});
+                if (imageSrc === TRANSPARENT_IMAGE_SRC) {
+                    return;
                 }
+
+                $image.css({backgroundImage: 'url("' + imageSrc + '")'});
+                $image.prop({src: TRANSPARENT_IMAGE_SRC});
             };
+
+            // initial check if the image should be modified
+            checkChanges();
 
             // use mutation observer as the quickest way to find changes and apply them to our fake
             if ($.support.mutationObserver) {
