@@ -21,6 +21,9 @@
 
     // background images can't overflow and so shouldn't normal images
     overflow: hidden !important;
+    
+    // fixes firefox rendering issues for images displayed on top of canvas elements
+    -moz-transform: translateZ(0);
 
     // create object positioning classes
     // these follow the bootstrap breakpoints for easy responsive styling
