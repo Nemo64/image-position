@@ -16,6 +16,15 @@
         height: auto;
     }
 
+    // hide unscaled image, and ..
+    visibility: hidden;
+    // .. show again when objectfit natively supported or polyfill was applied or when its hopeless
+    .objectfit &,
+    .no-backgroundsize &,
+    &.image-polyfill {
+        visibility: visible;
+    }
+
     // prevent padding as the behavior is different between background and object-position
     padding: 0 !important;
 

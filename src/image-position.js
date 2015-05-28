@@ -18,6 +18,10 @@
     $.support.addEventListener = 'addEventListener' in document;
     testElement = null;
 
+    if ($.support.objectFit) {
+        $('html').addClass('objectfit');
+    }
+
     if ($.support.objectFit && $.support.objectPosition) {
         return; // full support detected
     }
